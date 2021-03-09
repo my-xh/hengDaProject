@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}{{ product_name }}{% endblock title %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/products.css' %}">
+<!-- 广告横幅 -->
+<div class="container-fluid">
+    <div class="row">
+        <img src="{% static 'img/products.jpg' %}" class="img-responsive">
+    </div>
+</div>
+<!-- 页面主体 -->
+
+<div class="container">
+
+    <div class="row row-3">
+        <!-- 侧边导航栏 -->
+        <div class="col-md-3">
+            <div class="model-title">产品中心</div>
+            <div class="model-list">
+
+                <ul class="list-group">
+                    <li class="list-group-item" id='robot'>
+                        <a href="{% url 'productsApp:products' 'robot' %}">家用机器人</a>
+                    </li>
+                    <li class="list-group-item" id="monitoring">
+                        <a href="{% url 'productsApp:products' 'monitoring' %}">智能监控</a>
+                    </li>
+                    <li class="list-group-item" id="face">
+                        <a href="{% url 'productsApp:products' 'face' %}">人脸识别解决方案</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+        <!-- 说明文字和图片 -->
+        <div class="col-md-9">
+            <div class="model-details-title">
+                {{ product_name }}
+            </div>
+            <!-- 此处填入产品列表内容 -->
+            <div class="model-details">
+                {% for product in product_list %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="{% url 'productsApp:productDetail' product.id %}" class="thumbnail row-4">
+                            <!-- <img class="img-responsive" src="{{ product.product_imgs.all.0.photo.url }}"> -->
+                            <img class="img-responsive" src="{{ product.product_imgs.first.photo.url }}">
+                        </a>
+
+                        <!-- {% for img in product.product_imgs.all %}
+                        {% if forloop.first %}
+                        <a href="#" class="thumbnail row-4">
+                            <img class="img-responsive" src="{{ img.photo.url }}">
+                        </a>
+                        {% endif %}
+                        {% endfor %} -->
+                    </div>
+                    <div class="col-md-6">
+                        <h3>{{ product.title|truncatechars:"20" }}</h3>
+                        <p>{{ product.description|truncatechars:"150"|linebreaks }}</p>
+                        <div class="thumbnail row-5">
+                            <div class="caption">
+                                <a href="{% url 'productsApp:productDetail' product.id %}" class="btn btn-primary" role="button">
+                                    查看详情
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <!-- 分页控件 -->
+            {% if page_data %}
+            <div class="paging">
+                <ul class="pagination pagination-sm pagination-xs" id="pages">
+                    <li><a href="?page={{ page_data.page|add:-1 }}">&laquo;</a></li>
+                    {% if page_data.first %}
+                    <li><a href="?page=1">1</a></li>
+                    {% endif %}
+                    {% if page_data.left_has_more %}
+                    <li><span>...</span></li>
+                    {% endif %}
+                    {% for i in page_data.left %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endfor %}
+                    <li class="active"><a href="?page={{ page_data.page }}">{{ page_data.page }}</a></li>
+                    {% for i in page_data.right %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endfor %}
+                    {% if page_data.right_has_more %}
+                    <li><span>...</span></li>
+                    {% endif %}
+                    {% if page_data.last %}
+                    <li><a href="?page={{ page_data.total_pages }}">{{ page_data.total_pages }}</a></li>
+                    {% endif %}
+                    <li><a href="?page={{ page_data.page|add:1 }}">&raquo;</a></li>
+                </ul>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,236 @@
+.top {
+    margin-top: 10px;
+}
+
+.phone {
+    color: #666;
+    float: right;
+}
+
+.mail {
+    color: #666;
+    float: right;
+}
+
+/* 正常的未被访问过的超链接 */
+.ant:link {
+    text-decoration: none;
+}
+
+/* 已经访问过的超链接 */
+.ant:visited {
+    text-decoration: none;
+}
+
+/* 光标移动到超链接上 */
+.ant:hover {
+    text-decoration: none;
+}
+
+/* 激活的超链接 */
+.ant:active {
+    text-decoration: none;
+}
+
+/* 导航条默认属性设置 */
+.navbar-default {
+    margin-bottom: 0;
+    border: 0;
+    background-color: #e7e7e7;
+    margin-top: 30px;
+}
+
+/* 导航条栏目激活时属性 */
+.navbar-default .navbar-nav .active a,
+.navbar-default .navbar-nav .active a:hover,
+.navbar-default .navbar-nav .active a:focus {
+    background-color: #005197;
+    color: #fff;
+}
+
+/* 一级菜单光标移过时属性 */
+.navbar-default .navbar-nav li a:hover {
+    color: #fff;
+    background-color: #005197;
+}
+
+/* 一级菜单光标展开时属性 */
+.navbar-default .navbar-nav li.open a.on {
+    color: #fff;
+    background-color: #005197;
+}
+
+/* 一级菜单展开时，二级菜单光标移过时属性 */
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
+    color: #fff;
+    background-color: #78b0e0;
+}
+
+/* 下拉菜单内边距 */
+.dropdown-menu {
+    padding: 0;
+}
+
+/* 二级菜单标签属性 */
+.dropdown-menu li a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #777;
+    text-align: center;
+}
+
+/* 一级菜单激活时，二级菜单光标移过时属性 */
+/* .navbar-default .navbar-nav li.active ul a:hover {
+    color: #fff;
+    background-color: #022a4d;
+} */
+
+/* 一级菜单宽度和文字对齐方式 */
+.nav-top {
+    /* width: 14%; */
+    min-width: 14%;
+    text-align: center;
+}
+
+.line {
+    height: 3px;
+    width: 100%;
+    background: #005197;
+}
+
+/* 主题标题 */
+.model-details-title {
+    padding: 15px 0;
+    font-size: 18px;
+    border-bottom: 1px #005197 solid;
+    color: #005197;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+/* 文字段落 */
+.model-details p {
+    line-height: 30px;
+    text-indent: 2em;
+    text-align: justify;
+    text-justify: inter-ideograph;
+}
+
+/* 主体图片 */
+.model-details img {
+    margin: 0 auto;
+}
+
+.web-footer {
+    width: 100%;
+    margin-top: 30px;
+}
+
+#map-footer {
+    background-color: #3a3a3a;
+}
+
+#map-footer dl {
+    text-align: center;
+    margin-top: 40px;
+}
+
+#map-footer dt {
+    padding: 3px;
+    color: #fff;
+}
+
+#map-footer dd {
+    padding: 3px;
+}
+
+/* 二维码广告文字样式设置 */
+#map-footer p {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #fff;
+    font-size: 16px;
+}
+
+#map-footer a {
+    color: #a6a6a6;
+    font-size: 13px;
+}
+
+#map-footer a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+#wx {
+    text-align: center;
+}
+
+.qrimg {
+    max-width: 170px;
+}
+
+#patent-footer {
+    text-align: center;
+    background-color: #3a3a3a;
+}
+
+#patent-footer p {
+    margin-top: 10px;
+    padding-right: 80px;
+    color: #8d8d8d;
+    font-size: 11px;
+}
+
+.row-3 {
+    margin-top: 30px;
+}
+
+/* 侧边导航栏标题样式 */
+.model-title {
+    text-align: center;
+    color: #fff;
+    font-size: 22px;
+    padding: 15px 0;
+    background: #005197;
+    margin-top: 25px;
+}
+
+/* 侧边导航栏列表项样式 */
+.model-list li {
+    text-align: center;
+    background-color: #f6f6f6;
+    font-size: 16px;
+}
+
+/* 侧边导航栏列表项链接样式 */
+.model-list li a {
+    color: #545353;
+}
+
+/* 侧边导航栏列表项链接激活样式 */
+.model-list li a:hover {
+    text-decoration: none;
+    color: #005197;
+}
+
+/* 侧边导航栏激活样式 */
+.model-list li.active {
+    text-align: center;
+    background-color: #f6f6f6;
+    font-size: 16px;
+    border-color: #ddd;
+}
+
+/* 侧边导航栏激活状态下鼠标移过时样式 */
+.model-list li.active:hover {
+    text-align: center;
+    background-color: #f6f6f6;
+    font-size: 16px;
+    border-color: #ddd;
+}
+
+/* 侧边导航栏激活状态时链接样式 */
+.model-list li.active a {
+    color: #005197;
+}
