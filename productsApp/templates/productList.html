@@ -60,10 +60,11 @@
                     </div>
                     <div class="col-md-6">
                         <h3>{{ product.title|truncatechars:"20" }}</h3>
-                        <p>{{ product.description|truncatechars:"150"|linebreaks }}</p>
+                        <p>{{ product.description|truncatechars:"150"|add:"..."|linebreaks }}</p>
                         <div class="thumbnail row-5">
                             <div class="caption">
-                                <a href="{% url 'productsApp:productDetail' product.id %}" class="btn btn-primary" role="button">
+                                <a href="{% url 'productsApp:productDetail' product.id %}" class="btn btn-primary"
+                                    role="button">
                                     查看详情
                                 </a>
                             </div>
@@ -71,34 +72,34 @@
                     </div>
                 </div>
                 {% endfor %}
-            </div>
-            <!-- 分页控件 -->
-            {% if page_data %}
-            <div class="paging">
-                <ul class="pagination pagination-sm pagination-xs" id="pages">
-                    <li><a href="?page={{ page_data.page|add:-1 }}">&laquo;</a></li>
-                    {% if page_data.first %}
-                    <li><a href="?page=1">1</a></li>
-                    {% endif %}
-                    {% if page_data.left_has_more %}
-                    <li><span>...</span></li>
-                    {% endif %}
-                    {% for i in page_data.left %}
-                    <li><a href="?page={{ i }}">{{ i }}</a></li>
-                    {% endfor %}
-                    <li class="active"><a href="?page={{ page_data.page }}">{{ page_data.page }}</a></li>
-                    {% for i in page_data.right %}
-                    <li><a href="?page={{ i }}">{{ i }}</a></li>
-                    {% endfor %}
-                    {% if page_data.right_has_more %}
-                    <li><span>...</span></li>
-                    {% endif %}
-                    {% if page_data.last %}
-                    <li><a href="?page={{ page_data.total_pages }}">{{ page_data.total_pages }}</a></li>
-                    {% endif %}
-                    <li><a href="?page={{ page_data.page|add:1 }}">&raquo;</a></li>
-                </ul>
-            {% endif %}
+                <!-- 分页控件 -->
+                {% if page_data %}
+                <div class="paging">
+                    <ul class="pagination pagination-sm pagination-xs" id="pages">
+                        <li><a href="?page={{ page_data.page|add:-1 }}">&laquo;</a></li>
+                        {% if page_data.first %}
+                        <li><a href="?page=1">1</a></li>
+                        {% endif %}
+                        {% if page_data.left_has_more %}
+                        <li><span>...</span></li>
+                        {% endif %}
+                        {% for i in page_data.left %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endfor %}
+                        <li class="active"><a href="?page={{ page_data.page }}">{{ page_data.page }}</a></li>
+                        {% for i in page_data.right %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endfor %}
+                        {% if page_data.right_has_more %}
+                        <li><span>...</span></li>
+                        {% endif %}
+                        {% if page_data.last %}
+                        <li><a href="?page={{ page_data.total_pages }}">{{ page_data.total_pages }}</a></li>
+                        {% endif %}
+                        <li><a href="?page={{ page_data.page|add:1 }}">&raquo;</a></li>
+                    </ul>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -66,13 +66,13 @@
                         <a href="#" class="dropdown-toggle on" data-toggle="dropdown">新闻动态</a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{% url 'newsApp:company' %}">企业要闻</a>
+                                <a href="{% url 'newsApp:news' 'company' %}">企业要闻</a>
                             </li>
                             <li>
-                                <a href="{% url 'newsApp:industry' %}">行业新闻</a>
+                                <a href="{% url 'newsApp:news' 'industry' %}">行业新闻</a>
                             </li>
                             <li>
-                                <a href="{% url 'newsApp:notice' %}">通知公告</a>
+                                <a href="{% url 'newsApp:news' 'notice' %}">通知公告</a>
                             </li>
                         </ul>
                     </li>
@@ -160,7 +160,7 @@
             </div>
             <div class="col-md-4" id="wx">
                 <p>扫描二维码，关注我们</p>
-                <img src="{% static 'img/qr.png' %}" class="primg" alt="wx">
+                <img src="{% static 'img/qr.png' %}" class="qrimg" alt="wx">
                 <p>客服热线：<b style="font-style: 20px;">400 111 2222</b></p>
             </div>
         </div>

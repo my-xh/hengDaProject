@@ -37,13 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'homeApp',      # 添加“首页”应用
-    'aboutApp',     # 添加“公司简介”应用
-    'newsApp',      # 添加“新闻动态”应用
-    'productsApp',  # 添加“产品中心”应用
-    'serviceApp',   # 添加“服务支持”应用
-    'scienceApp',   # 添加“科研基地”应用
-    'contactApp',   # 添加“人才招聘”应用
+    'homeApp',          # 添加“首页”应用
+    'aboutApp',         # 添加“公司简介”应用
+    'newsApp',          # 添加“新闻动态”应用
+    'productsApp',      # 添加“产品中心”应用
+    'serviceApp',       # 添加“服务支持”应用
+    'scienceApp',       # 添加“科研基地”应用
+    'contactApp',       # 添加“人才招聘”应用
+    'DjangoUeditor',    # 添加富文本应用
+    'haystack',         # 添加搜索应用
 ]
 
 MIDDLEWARE = [
@@ -131,3 +133,13 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# 搜索配置
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'newsApp.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    }
+}
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 5
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'

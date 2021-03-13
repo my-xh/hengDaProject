@@ -4,5 +4,5 @@ from . import views
 app_name = 'scienceApp'
 
 urlpatterns = [
-    path('', views.science, name='science'),   # 科研基地
+    path('science/', views.science, name='science'),   # 科研基地
 ]

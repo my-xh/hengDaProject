@@ -22,12 +22,14 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),                # 管理员
     path('', home, name='home'),                    # 首页
-    path('about/', include('aboutApp.urls')),       # 公司简介
-    path('news/', include('newsApp.urls')),         # 新闻动态
-    path('products/', include('productsApp.urls')), # 产品中心
+    path('', include('aboutApp.urls')),     # 公司简介
+    path('', include('newsApp.urls')),      # 新闻动态
+    path('', include('productsApp.urls')),  # 产品中心
     path('service/', include('serviceApp.urls')),   # 服务支持
-    path('science/', include('scienceApp.urls')),   # 科研基地
+    path('', include('scienceApp.urls')),   # 科研基地
     path('contact/', include('contactApp.urls')),   # 人才招聘
+    path('ueditor/', include('DjangoUeditor.urls')),    # 富文本插件
+    path('search/', include('haystack.urls')),          # 搜索插件
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

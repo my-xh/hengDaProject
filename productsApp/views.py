@@ -29,7 +29,7 @@ def products(request, product_name):
         page = int(request.GET.get('page', 1))
         if page < 1:
             page = 1
-        if page > paginator.num_pages:
+        elif page > paginator.num_pages:
             page = paginator.num_pages
         product_list = paginator.page(page)
         page_data = get_page_data(paginator, page)
