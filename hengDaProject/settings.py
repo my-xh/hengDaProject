@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'contactApp',       # 添加“人才招聘”应用
     'DjangoUeditor',    # 添加富文本应用
     'haystack',         # 添加搜索应用
+    'widget_tweaks',    # 添加模型表单组件定制化渲染应用
 ]
 
 MIDDLEWARE = [
@@ -143,3 +144,10 @@ HAYSTACK_CONNECTIONS = {
 }
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 5
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+# 邮箱配置
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PART = 25                             # 端口号
+EMAIL_HOST_USER = '2435128850@qq.com'       # 企业QQ邮箱账号
+EMAIL_HOST_PASSWORD = 'zavhpcpvpoezebbf'    # 授权码
+EMAIL_USE_TLS = True                        # 使用TLS加密

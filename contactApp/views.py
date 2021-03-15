@@ -1,11 +1,30 @@
 from django.shortcuts import render, HttpResponse
+from .models import Ad
+from .forms import ResumeForm
 
 # Create your views here.
 
 def contact(request):
-    html = '<html><body>欢迎咨询</body></html>'
-    return HttpResponse(html)
+    return render(request, 'contact.html', {
+        'active_menu': 'contact',
+        'sub_menu': 'contactus',
+    })
 
 def recruit(request):
-    html = '<html><body>加入恒达</body></html>'
-    return HttpResponse(html)
+    ad_list = Ad.objects.all().order_by('-publish_date')
+    if request.method == 'POST':
+        resume_form = ResumeForm(data=request.POST, files=request.FILES)
+        if resume_form.is_valid():
+            resume_form.save()
+            return render(request, 'success.html', {
+                'active_menu': 'contact',
+                'sub_menu': 'recruit',
+            })
+    else:
+        resume_form = ResumeForm()
+    return render(request, 'recruit.html', {
+        'active_menu': 'contact',
+        'sub_menu': 'recruit',
+        'AdList': ad_list,
+        'resumeForm': resume_form,
+    })
