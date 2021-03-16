@@ -25,7 +25,7 @@ urlpatterns = [
     path('', include('aboutApp.urls')),     # 公司简介
     path('', include('newsApp.urls')),      # 新闻动态
     path('', include('productsApp.urls')),  # 产品中心
-    path('service/', include('serviceApp.urls')),   # 服务支持
+    path('', include('serviceApp.urls')),   # 服务支持
     path('', include('scienceApp.urls')),   # 科研基地
     path('', include('contactApp.urls')),   # 人才招聘
     path('ueditor/', include('DjangoUeditor.urls')),    # 富文本插件
