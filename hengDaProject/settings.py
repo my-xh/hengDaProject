@@ -151,3 +151,15 @@ EMAIL_PART = 25                             # 端口号
 EMAIL_HOST_USER = '2435128850@qq.com'       # 企业QQ邮箱账号
 EMAIL_HOST_PASSWORD = 'zavhpcpvpoezebbf'    # 授权码
 EMAIL_USE_TLS = True                        # 使用TLS加密
+
+# 缓存配置
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'cache_table_home',
+        'TIMEOUT': 600,
+        'OPTIONS': {
+            'MAX_ENTRIES': 2000,
+        }
+    }
+}

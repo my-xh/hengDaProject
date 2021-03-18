@@ -41,7 +41,7 @@ class Resume(models.Model):
     major = models.CharField(max_length=40, verbose_name='专业')
     position = models.CharField(max_length=40, verbose_name='申请职位')
     experience = models.TextField(blank=True, null=True, verbose_name='学习或工作经历')
-    photo = models.ImageField(upload_to='contact/recruit/%Y_%m_%d')
+    photo = models.ImageField(upload_to='contact/recruit/%Y_%m_%d', verbose_name='个人照片')
     grade_list = (
         (1, '未审'),
         (2, '通过'),
