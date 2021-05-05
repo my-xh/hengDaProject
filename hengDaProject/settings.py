@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'a6eh7j%p54t2h)*-0i9j)+6)qa8j%j9l6v3e)xkh-)+__^n71*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*', ]
 
@@ -83,10 +83,20 @@ WSGI_APPLICATION = 'hengDaProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'pythonweb',
+        'HOST': '',
+        'PORT': '3306',
+        'USER': 'root',
+        'PASSWORD': 'root',
     }
 }
 
@@ -150,7 +160,7 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PART = 25                             # 端口号
 EMAIL_HOST_USER = '2435128850@qq.com'       # 企业QQ邮箱账号
-EMAIL_HOST_PASSWORD = 'zavhpcpvpoezebbf'    # 授权码
+EMAIL_HOST_PASSWORD = 'zrjjajnrxsdwecgf'    # 授权码
 EMAIL_USE_TLS = True                        # 使用TLS加密
 
 # 缓存配置

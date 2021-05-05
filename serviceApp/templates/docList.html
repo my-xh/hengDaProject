@@ -4,76 +4,79 @@
 {% block title %}资料下载{% endblock title %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/news.css' %}">
-<!-- 广告横幅 -->
-<div class="container-fluid">
-    <div class="row">
-        <img src="{% static 'img/service.jpg' %}" class="img-responsive">
-    </div>
-</div>
-<!-- 页面主体 -->
-<div class="container">
-
-    <div class="row row-3">
-        <!-- 侧边导航栏 -->
-        <div class="col-md-3">
-            <div class="model-title">服务支持</div>
-            <div class="model-list">
-
-                <ul class="list-group">
-                    <li class="list-group-item" id='download'>
-                        <a href="{% url 'serviceApp:download' %}">资料下载</a>
-                    </li>
-                    <li class="list-group-item" id="platform">
-                        <a href="{% url 'serviceApp:platform' %}">人脸识别开放平台</a>
-                    </li>
-                </ul>
-            </div>
+    <link rel="stylesheet" href="{% static 'css/news.css' %}">
+    <!-- 广告横幅 -->
+    <div class="container-fluid">
+        <div class="row">
+            <img src="{% static 'img/service.jpg' %}" class="img-responsive">
         </div>
-        <!-- 说明文字和图片 -->
-        <div class="col-md-9">
-            <div class="model-details-title">
-                资料列表
-            </div>
-            <!-- 此处填入资料列表内容 -->
-            <div class="model-details">
-                {% for doc in doc_list %}
-                <div class="news-model">
-                    <img src="{% static 'img/newsicon.gif' %}">
-                    <a href="{% url 'serviceApp:getDoc' doc.id %}"><b>{{ doc.title }}</b></a>
-                    <span>【{{ doc.publish_date|date:"Y-m-d" }}】</span>
-                </div>
-                {% endfor %}
-                <!-- 分页控件 -->
-                {% if page_data %}
-                <div class="paging">
-                    <ul class="pagination pagination-sm pagination-xs" id="pages">
-                        <li><a href="?page={{ page_data.page|add:-1 }}">&laquo;</a></li>
-                        {% if page_data.first %}
-                        <li><a href="?page=1">1</a></li>
-                        {% endif %}
-                        {% if page_data.left_has_more %}
-                        <li><span>...</span></li>
-                        {% endif %}
-                        {% for i in page_data.left %}
-                        <li><a href="?page={{ i }}">{{ i }}</a></li>
-                        {% endfor %}
-                        <li class="active"><a href="?page={{ page_data.page }}">{{ page_data.page }}</a></li>
-                        {% for i in page_data.right %}
-                        <li><a href="?page={{ i }}">{{ i }}</a></li>
-                        {% endfor %}
-                        {% if page_data.right_has_more %}
-                        <li><span>...</span></li>
-                        {% endif %}
-                        {% if page_data.last %}
-                        <li><a href="?page={{ page_data.total_pages }}">{{ page_data.total_pages }}</a></li>
-                        {% endif %}
-                        <li><a href="?page={{ page_data.page|add:1 }}">&raquo;</a></li>
+    </div>
+    <!-- 页面主体 -->
+    <div class="container">
+
+        <div class="row row-3">
+            <!-- 侧边导航栏 -->
+            <div class="col-md-3">
+                <div class="model-title">服务支持</div>
+                <div class="model-list">
+
+                    <ul class="list-group">
+                        <li class="list-group-item" id='download'>
+                            <a href="{% url 'serviceApp:download' %}">资料下载</a>
+                        </li>
+                        <li class="list-group-item" id="platform">
+                            <a href="{% url 'serviceApp:platform' %}">人脸识别开放平台</a>
+                        </li>
+                        <li class="list-group-item" id="ocr">
+                            <a href="{% url 'serviceApp:ocr' %}">中文字符识别</a>
+                        </li>
                     </ul>
                 </div>
-                {% endif %}
+            </div>
+            <!-- 说明文字和图片 -->
+            <div class="col-md-9">
+                <div class="model-details-title">
+                    资料列表
+                </div>
+                <!-- 此处填入资料列表内容 -->
+                <div class="model-details">
+                    {% for doc in doc_list %}
+                        <div class="news-model">
+                            <img src="{% static 'img/newsicon.gif' %}">
+                            <a href="{% url 'serviceApp:getDoc' doc.id %}"><b>{{ doc.title }}</b></a>
+                            <span>【{{ doc.publish_date|date:"Y-m-d" }}】</span>
+                        </div>
+                    {% endfor %}
+                    <!-- 分页控件 -->
+                    {% if page_data %}
+                        <div class="paging">
+                            <ul class="pagination pagination-sm pagination-xs" id="pages">
+                                <li><a href="?page={{ page_data.page|add:-1 }}">&laquo;</a></li>
+                                {% if page_data.first %}
+                                    <li><a href="?page=1">1</a></li>
+                                {% endif %}
+                                {% if page_data.left_has_more %}
+                                    <li><span>...</span></li>
+                                {% endif %}
+                                {% for i in page_data.left %}
+                                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                {% endfor %}
+                                <li class="active"><a href="?page={{ page_data.page }}">{{ page_data.page }}</a></li>
+                                {% for i in page_data.right %}
+                                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                {% endfor %}
+                                {% if page_data.right_has_more %}
+                                    <li><span>...</span></li>
+                                {% endif %}
+                                {% if page_data.last %}
+                                    <li><a href="?page={{ page_data.total_pages }}">{{ page_data.total_pages }}</a></li>
+                                {% endif %}
+                                <li><a href="?page={{ page_data.page|add:1 }}">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock content %}

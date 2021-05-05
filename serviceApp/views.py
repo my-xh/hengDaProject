@@ -1,3 +1,5 @@
+import pytesseract
+from PIL import Image
 from django.shortcuts import render, HttpResponse, get_object_or_404
 from django.http import StreamingHttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -12,6 +14,7 @@ import base64
 
 face_detector_path = r'serviceApp\haarcascade_frontalface_default.xml'
 face_detector = cv2.CascadeClassifier(face_detector_path)
+
 
 # Create your views here.
 
@@ -112,12 +115,32 @@ def facedetect_demo(request):
         for x, y, w, h in faces:
             img = cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
-        retval, buf_img = cv2.imencode('.jpg', img)     # 在内存中编码为jpg格式
-        img64 = base64.b64encode(buf_img)               # base64编码用于网络传输
-        img64 = str(img64, encoding='utf-8')            # bytes类型转换为str类型
+        retval, buf_img = cv2.imencode('.jpg', img)  # 在内存中编码为jpg格式
+        img64 = base64.b64encode(buf_img)  # base64编码用于网络传输
+        img64 = str(img64, encoding='utf-8')  # bytes类型转换为str类型
         result['img64'] = img64
 
         return JsonResponse(result)
+
+
+def ocr(request):
+    return render(request, 'ocr.html', {
+        'active_menu': 'service',
+        'sub_menu': 'ocr',
+    })
+
+
+@csrf_exempt
+def ocrdetect(request):
+    result = {'code': None}
+    if request.method == 'POST':
+        if request.FILES.get('image', None) is not None:
+            img = read_image(stream=request.FILES['image'])
+            img = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+            code = pytesseract.image_to_string(img, lang='chi_sim')
+            result.update({'code': code})
+
+    return JsonResponse(result)
 
 
 # 基于数据流的图像读取

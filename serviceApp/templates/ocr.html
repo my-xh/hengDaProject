@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}中文字符识别{% endblock title %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/news.css' %}">
+    <link rel="stylesheet" href="{% static 'css/codemirror.css' %}">
+    <script src="{% static 'js/codemirror.js' %}"></script>
+    <script src="{% static 'js/python.js' %}"></script>
+    <style type="text/css">.CodeMirror {
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }</style>
+    <!-- 广告横幅 -->
+    <div class="container-fluid">
+        <div class="row">
+            <img src="{% static 'img/service.jpg' %}" class="img-responsive">
+        </div>
+    </div>
+    <!-- 页面主体 -->
+    <div class="container">
+
+        <div class="row row-3">
+            <!-- 侧边导航栏 -->
+            <div class="col-md-3">
+                <div class="model-title">服务支持</div>
+                <div class="model-list">
+
+                    <ul class="list-group">
+                        <li class="list-group-item" id='download'>
+                            <a href="{% url 'serviceApp:download' %}">资料下载</a>
+                        </li>
+                        <li class="list-group-item" id="platform">
+                            <a href="{% url 'serviceApp:platform' %}">人脸识别开放平台</a>
+                        </li>
+                        <li class="list-group-item" id="ocr">
+                            <a href="{% url 'serviceApp:ocr' %}">中文字符识别</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 说明文字和图片 -->
+            <div class="col-md-9">
+                <div class="model-details-title">
+                    中文字符识别接口文档
+                </div>
+                <div class="model-details">
+                    <h3>一. 体验产品</h3>
+                    <!-- 按钮触发模态框 -->
+                    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                        中文字符识别
+                    </button>
+                    <!-- 模态框(Modal) -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                         aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">在线中文字符识别</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- 图片上传 -->
+                                    <div>
+
+                                        <img src="{% static 'img/sample.png' %}" class="img-responsive"
+                                             id="photoIn">
+                                        <input type="file" name="photo" id="photo">
+
+                                    </div>
+                                    <br>
+                                    <!-- 运行结果 -->
+                                    <div>
+                                        <div>
+                                            <p id="label_result" class="text-center h4 alert-success" hidden>
+                                                识别结果
+                                            </p>
+                                        </div>
+                                        <div>
+
+                                            <textarea id="output" disabled class="form-control" rows="8"
+                                                      style="display: none"></textarea>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button id="recognition" type="button" class="btn btn-primary">识别</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>二. API接口说明</h3>
+                    </br>
+                    <h4><strong>基本信息：</strong></h4>
+                    <p>
+                        请求类型：HTTP/HTTPS。请求方式：POST
+                    </p>
+                    <p>
+                        接口地址：http://192.168.1.101:8000/service/api/ocrdetect/
+                    </p>
+                    </br>
+                    <h4><strong>接口描述：</strong></h4>
+                    <p>
+                        中文字符识别，此接口用于从图片中提取文字内容。目前该接口仅供测试使用，调用该接口暂时不限制调用次数。
+                    </p>
+
+                    </br>
+                    <h4><strong>本地调用示例：</strong></h4>
+                    <div>
+                    <textarea name="code" id="code">
+import requests
+
+url = 'http://192.168.1.101:8000/service/api/ocrdetect/'
+
+# 上传图像并检测
+tracker = None
+img_path = 'ocrtest.png'
+files = {
+    'image': ('filename2', open(img_path, 'rb'), 'image/jpeg')
+}
+
+res = requests.post(url, data=tracker, files=files).json().get('code')
+
+# 显示识别内容
+if res:
+    print(f'识别结果:\n{res.strip()}')
+else:
+    print('识别失败！')
+                    </textarea>
+                    </div>
+                    </br>
+                    <h4><strong>调用结果：</strong></h4>
+                    <img class="img-responsive" style="max-width:600px;" src="{% static 'img/ocrdetect.png' %}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+            mode: {
+                name: "python",
+                version: 2,
+                singleLineStringErrors: false
+            },
+            lineNumbers: true,
+            indentUnit: 4,
+            tabMode: "shift",
+            matchBrackets: true
+        });
+    </script>
+
+    <script>
+        $(function () {
+            $('#photo').on('change', function () {
+                $('#label_result').hide();
+                $('#output').hide();
+                var r = new FileReader();
+                f = document.getElementById('photo').files[0];
+                r.readAsDataURL(f);
+                r.onload = function (e) {
+                    document.getElementById('photoIn').src = this.result;
+                }
+            });
+        });
+    </script>
+    <!-- 图像发送至后台服务器进行识别 -->
+    <script>
+        $('#recognition').click(function (e) {
+            formData = new FormData();
+            var file = photo.files[0];
+            formData.append('image', file);
+            $.ajax({
+                type: "POST",
+                url: "api/ocrdetect/",
+                data: formData,
+                dataType: "json",
+                processData: false,
+                contentType: false,
+                // <!-- 返回结果显示 -->
+                success: function (response) {
+                    $('#label_result').show();
+                    $('#output').show();
+                    output.value = response['code'];
+                }
+            });
+
+        });
+    </script>
+{% endblock content %}

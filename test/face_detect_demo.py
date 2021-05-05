@@ -1,6 +1,6 @@
 import cv2, requests
 
-url = 'http://192.168.1.103:8000/service/api/facedetect/'
+url = 'http://192.168.1.101:8000/service/api/facedetect/'
 
 # 上传图像并检测
 tracker = None

@@ -26,5 +26,5 @@ def create_qrcode(url, file_name):
     img.save('../static/img/qr.png', quality=95)
 
 if __name__ == '__main__':
-    create_qrcode('http://192.168.1.103:8000', 'logo.png')
+    create_qrcode('http://192.168.1.101:8000', 'logo.png')
     print('成功')
