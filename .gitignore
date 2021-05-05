@@ -69,3 +69,4 @@ migrations/
 *.iml
 out
 gen
+/db.sqlite3
