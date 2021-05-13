@@ -79,7 +79,7 @@
 - mv /usr/local/hengDaProject/templates/search/indexes/newsApp/MyNews_text.txt !#^:h/mynews_text.txt
 - python3 manage.py rebuild_index
 ### 4. 修改路径分隔符
-- sed -E -i "s#([\\"'].\*)\\\\\\(.\*[\\"'])#\1/\2#g" /usr/local/hengDaProject/*App/views.py
+- sed -E -i "s#(\\<[a-zA-Z0-9]\*\\>)\\\\\\#\1/#g" /usr/local/hengDaProject/\*App/\*.py
 ### 5. 安装配置Tesseract-OCR
 - yum -y install tesseract
 - 简体中文语言包：yum -y install tesseract-langpack-chi_sim
@@ -186,9 +186,9 @@ upstream hengDaProject {
 # configuration of the server
 server {
     # the port your site will be served on
-    listen      8001;
+    listen      80;
     # the domain name it will serve for
-    server_name 0.0.0.0;      # IP地址或者域名
+    server_name 网站域名;      # IP地址或者域名
     access_log /usr/local/hengDaProject/webconfig/access.log main; # Nginx日志配置
     error_log /usr/local/hengDaProject/webconfig/error.log;
     charset     utf-8;
@@ -237,7 +237,18 @@ server {
 - sed -E -i 's/(http=.*)/# \1/' webconfig/uwsgi.ini
 ### 2. 修改域名
 - sed -E -i 's/(([0-9]{1,3}\\.){3}[0-9]{1,3}:[0-9]{4})/网站域名/g' \*App/templates/\*.html
-### 3. 关闭Debug模式
+- sed -E -i 's/(([0-9]{1,3}\\.){3}[0-9]{1,3}:[0-9]{4})/网站域名/g' test/*.py
+### 3. 更新二维码
+- cd test
+- python3 generateQRImg.py
+- cd ..
+### 4. 修改备案号
+- sed -E -i "s/(版权所有 \\| ).*号/\1备案号/" templates/base.html
+### 4. 修改邮箱配置
+- sed -E -i "s/(EMAIL_PART = )[^ ]\*/\1端口号/" hengDaProject/settings.py
+- sed -E -i "s/(EMAIL_HOST_USER = )[^ ]\*/\1'企业QQ邮箱账号'/" hengDaProject/settings.py
+- sed -E -i "s/(EMAIL_HOST_PASSWORD = )[^ ]\*/\1'授权码'/" hengDaProject/settings.py
+### 5. 关闭Debug模式
 - sed -E -i 's/(DEBUG = ).*/\1False/' hengDaProject/settings.py
 ***
 
