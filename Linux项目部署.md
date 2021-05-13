@@ -91,7 +91,11 @@
 
 >Exception Location:	/usr/local/python3/lib/python3.7/site-packages/django/forms/boundfield.py in as_widget, line 93
 - sed -E -i '93s/\\<(.*)\\>/# \1/' /usr/local/python3/lib/python3.7/site-packages/django/forms/boundfield.py
-### 7. 测试
+### 7. 修改邮箱配置
+- sed -E -i "s/(EMAIL_PART = )[^ ]\*/\1端口号/" hengDaProject/settings.py
+- sed -E -i "s/(EMAIL_HOST_USER = )[^ ]\*/\1'企业QQ邮箱账号'/" hengDaProject/settings.py
+- sed -E -i "s/(EMAIL_HOST_PASSWORD = )[^ ]\*/\1'授权码'/" hengDaProject/settings.py
+### 8. 测试
 - python3 manage.py runserver 0.0.0.0:8080
 ***
 
@@ -244,10 +248,6 @@ server {
 - cd ..
 ### 4. 修改备案号
 - sed -E -i "s/(版权所有 \\| ).*号/\1备案号/" templates/base.html
-### 4. 修改邮箱配置
-- sed -E -i "s/(EMAIL_PART = )[^ ]\*/\1端口号/" hengDaProject/settings.py
-- sed -E -i "s/(EMAIL_HOST_USER = )[^ ]\*/\1'企业QQ邮箱账号'/" hengDaProject/settings.py
-- sed -E -i "s/(EMAIL_HOST_PASSWORD = )[^ ]\*/\1'授权码'/" hengDaProject/settings.py
 ### 5. 关闭Debug模式
 - sed -E -i 's/(DEBUG = ).*/\1False/' hengDaProject/settings.py
 ***
